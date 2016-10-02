@@ -1,3 +1,3 @@
 # web-scraper
 
-Basic retrieval of html elements using Jsoup
+Retrieval of sport table data using Jsoup

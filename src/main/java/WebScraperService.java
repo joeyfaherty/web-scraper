@@ -7,11 +7,22 @@ import java.io.IOException;
 
 public class WebScraperService {
 
+    public static final String URL = "http://flashscore.com";
+
     public static void main(String[] args) throws IOException {
-        Document document = Jsoup.connect("http://flashscore.com").get();
+        Document document = getConnection();
         System.out.println("title is : " + getTitle(document));
         printAllLinksInDocument(document);
         printMetadataOfUrl(document);
+    }
+
+    private static Document getConnection() {
+        try {
+            return Jsoup.connect(URL).get();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     private static String getTitle(Document document) {
