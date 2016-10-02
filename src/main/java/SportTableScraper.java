@@ -14,22 +14,22 @@ public class SportTableScraper {
         // establish a connection to the site
         Document document = getConnection();
 
-        // select a html element example: div.content
+        // select html elements, example: div.content
         Elements elements = document.select("table");
 
-        // for each element get all tables
-        for (Element table : elements) {
-            // for each table get all rows
-            for (Element row : table.select("tr")) {
-                // for each row get all columns
-                Elements tds = row.select("td");
-                // now we have the column data to save in excel, database, print etc
-                if (tds.size() == 24) {
-                    System.out.println("Team: " + tds.get(1).text());
-                    System.out.println("League Position: " + tds.get(0).text());
-                    System.out.println("Goal Difference: " + tds.get(22).text());
-                    System.out.println("Points: " + tds.get(23).text() + "\n");
-                }
+        // get the table from the list of elements
+        Element table = elements.get(0);
+
+        // for each table get all teams
+        for (Element row : table.select("tr")) {
+            // for each team get all statistics
+            Elements tds = row.select("td");
+            // now we have the team statistics data to save in excel, database, print etc
+            if (tds.size() == 24) {
+                System.out.println("Team: " + tds.get(1).text());
+                System.out.println("League Position: " + tds.get(0).text());
+                System.out.println("Goal Difference: " + tds.get(22).text());
+                System.out.println("Points: " + tds.get(23).text() + "\n");
             }
         }
     }
